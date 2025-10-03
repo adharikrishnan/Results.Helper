@@ -5,6 +5,11 @@ namespace Results.Helper.Extensions;
 
 public static class ApiResultExtensions
 {
+    /// <summary>
+    /// Maps the ErrorType to the corresponding HttpStatusCode.
+    /// </summary>
+    /// <param name="error">The Error Object</param>
+    /// <returns>The HttpStatusCode.</returns>
     public static HttpStatusCode GetStatusCode(this Error error) =>
         error.ErrorType switch
         {
@@ -14,10 +19,4 @@ public static class ApiResultExtensions
             ErrorType.Unauthorized => HttpStatusCode.Unauthorized,
             _ => HttpStatusCode.InternalServerError,
         };
-
-    public static string GetDetail(this Error error) =>
-        error.ErrorMessage ?? "An Unexpected error occured please contact support.";
-    
-    public static string GetTitle(this Error error) =>
-        error.ErrorCode ?? "UNEXPECTED_ERROR";
 }
