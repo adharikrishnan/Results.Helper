@@ -3,15 +3,15 @@ using Results.Helper.Models;
 
 namespace Results.Helper.Extensions;
 
-public static class ApiResultExtensions
+public static class ResultExtensions
 {
     /// <summary>
     /// Maps the ErrorType to the corresponding HttpStatusCode.
     /// </summary>
     /// <param name="error">The Error Object</param>
     /// <returns>The HttpStatusCode.</returns>
-    public static HttpStatusCode GetStatusCode(this Error error) =>
-        error.ErrorType switch
+    public static HttpStatusCode GetStatusCode(this Result result) =>
+        result.Error?.ErrorType switch
         {
             ErrorType.NotFound => HttpStatusCode.NotFound,
             ErrorType.Validation => HttpStatusCode.BadRequest,
@@ -19,4 +19,5 @@ public static class ApiResultExtensions
             ErrorType.Unauthorized => HttpStatusCode.Unauthorized,
             _ => HttpStatusCode.InternalServerError,
         };
+    
 }
